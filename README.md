@@ -27,3 +27,7 @@ sudo apt-get install xcalib
 # Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+## TODO
+* intensity control
+* periodic break reminder
+
