@@ -7,13 +7,14 @@ It's perfect for those late-night coding sessions when you want to reduce eye st
 
 ## Installation
 
-1. clone the repo.
-2. run `make install`
+1. Clone the repo.
+2. Run `make install`
+3. You will be asked if you want to have iris remind work at startup, `y` for yes `n` for no 
 
 ## Usage
 
 ```bash
-$ iris.sh [help | warm | dim | inv | off | remind]
+$ iris [help | warm | dim | inv | off | remind]
 ```
 
 ## Options
@@ -30,13 +31,13 @@ $ iris.sh [help | warm | dim | inv | off | remind]
 ## Example
 
 ```bash
-$ iris.sh warm
+$ iris warm
 ```
 
 This command will apply a warm color temperature to the screen.
 
 ```bash
-$ iris.sh remind
+$ iris remind
 ```
 
 This command will start a reminder that notifies you every 15 minutes with a healthy habit tip.
