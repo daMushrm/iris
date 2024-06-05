@@ -63,7 +63,7 @@ if [ "$1" == "remind" ]; then
     while true; do
         # Randomly select a habit from the list
         reminder=${habits[$RANDOM % ${#habits[@]}]}
-        sleep 5
+        sleep 900
         echo "[!] $reminder"
         notify-send -t 5000 "Iris" "$reminder"
     done
