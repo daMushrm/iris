@@ -12,6 +12,29 @@ display_help() {
     echo "  🔄    off    Return to normal screen settings"
     echo "  ⏰    remind Start a reminder every 15 minutes"
 }
+reminder_function(){
+
+	habits=(
+		"Take some rest."
+		"walk around for a minute."
+		"Stretch for a bit."
+		"Drink some water."
+		"Adjust your posture."
+		"Look away from the screen for a minute."
+		"Take a deep breath."
+		"Close your eyes for a moment."
+		"Relax your shoulders."
+	)
+
+	while true; do
+		# Randomly select a habit from the list
+		reminder=${habits[$RANDOM % ${#habits[@]}]}
+		sleep 900
+		echo "[!] $reminder"
+		notify-send -t 5000 "Iris" "$reminder"
+	done
+
+}
 
 # Show help if -h or no argument is provided
 if [ "$1" == "help" ] || [ -z "$1" ]; then
@@ -46,27 +69,10 @@ if [ "$1" == "warm" ]; then
     exit
 fi
 
+
 # Start a reminder every 15 minutes
 if [ "$1" == "remind" ]; then
-    habits=(
-        "Take some rest."
-        "walk around for a minute."
-        "Stretch for a bit."
-        "Drink some water."
-        "Adjust your posture."
-        "Look away from the screen for a minute."
-        "Take a deep breath."
-        "Close your eyes for a moment."
-        "Relax your shoulders."
-    )
-
-    while true; do
-        # Randomly select a habit from the list
-        reminder=${habits[$RANDOM % ${#habits[@]}]}
-        sleep 900
-        echo "[!] $reminder"
-        notify-send -t 5000 "Iris" "$reminder"
-    done
+	reminder_function &
     exit
 fi
 
