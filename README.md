@@ -8,7 +8,7 @@ It's perfect for those late-night coding sessions when you want to reduce eye st
 ## Usage
 
 ```bash
-$ ./script.sh [help | warm | dim | inv | off | remind]
+$ ./iris.sh [help | warm | dim | inv | off | remind]
 ```
 
 ## Options
@@ -25,13 +25,13 @@ $ ./script.sh [help | warm | dim | inv | off | remind]
 ## Example
 
 ```bash
-$ ./script.sh warm
+$ ./iris.sh warm
 ```
 
 This command will apply a warm color temperature to the screen.
 
 ```bash
-$ ./script.sh remind
+$ ./iris.sh remind
 ```
 
 This command will start a reminder that notifies you every 15 minutes with a healthy habit tip.
