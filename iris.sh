@@ -1,76 +1,125 @@
 #!/bin/bash
 
-# Display usage information
-display_help() {
-    echo "Usage: $0 [help | warm | dim | inv | off | remind]"
-    echo
+# logic for each flag
+help() {
+    echo "Usage: $0 [OPTIONS] [ARGUMENTS]"
     echo "Options:"
-    echo "  ❓    help   Show this help message and exit"
-    echo "  🌞    warm   Apply a warm color temperature to the screen"
-    echo "  🌑    dim    Make the screen darker"
-    echo "  🌈    inv    Invert the screen colors"
-    echo "  🔄    off    Return to normal screen settings"
-    echo "  ⏰    remind Start a reminder every 15 minutes"
+    echo "  -h, --help             Show help message"
+    echo "  -w, --warm    [VALUE]  Set warm value (1~10)"
+    echo "  -d, --dim     [VALUE]  Set dim value (1~10)"
+    echo "  -r, --remind  [VALUE]  Set remind interval in minutes (5~120)"
+    echo "  -i, --inverse          Activate inverted colors"
+    echo "  -n, --normal           Restore normal colors"
+    echo "Example:"
+    echo "  $0 -w 5 -d 3 -i -r 15"
+    echo "  $0 --warm 5 --dim 3 --inverse -remind 15"
+    exit 0
 }
 
-# Show help if -h or no argument is provided
-if [ "$1" == "help" ] || [ -z "$1" ]; then
-    display_help
-    exit
-fi
+warm() {
+    if [[ ! $1 =~ ^[1-9]$|^10$ ]]; then
+        echo "[x] Error: Warm value must be between 1 and 10"
+        exit 1
+    fi
 
-# Return to normal settings
-if [ "$1" == "off" ]; then
     xcalib -clear
-    exit
-fi
+    xcalib -blue 1.8 0 $1 -alter
+}
 
-# Invert screen colors
-if [ "$1" == "inv" ]; then
+dim() {
+    if [[ ! $1 =~ ^[0-9]$ ]]; then
+        echo "[x] Error: Dim value must be between 1 and 10"
+        exit 1
+    fi
+
+    xcalib -clear
+    xcalib -co $(( (10 - ($1 - 1)) * 10 )) -alter
+}
+
+inverse() {
     xcalib -i -a
-    exit
-fi
+}
 
-# Make the screen darker
-if [ "$1" == "dim" ]; then
+normal() {
     xcalib -clear
-    xcalib -co 30 -alter
     exit
-fi
+}
 
-# Apply warm color temperature
-if [ "$1" == "warm" ]; then
-    xcalib -clear
-    xcalib -co 90 -alter
-    xcalib -blue 1.8 0 50 -alter
-    exit
-fi
-
-# Start a reminder every 15 minutes
-if [ "$1" == "remind" ]; then
+remind() {
     habits=(
-        "Take some rest."
-        "walk around for a minute."
-        "Stretch for a bit."
-        "Drink some water."
-        "Adjust your posture."
-        "Look away from the screen for a minute."
-        "Take a deep breath."
-        "Close your eyes for a moment."
-        "Relax your shoulders."
+        "Take a break and rest your eyes."
+        "Get up and stretch for a minute."
+        "Drink some water to stay hydrated."
+        "Adjust your sitting posture."
+        "Look away from the screen for a moment."
+        "Take a deep breath and relax."
+        "Close your eyes and relax for a moment."
+        "Relax your shoulders and release tension."
     )
+
+    if [[ ! $1 =~ ^[5-9]$|^1[0-9]$|^120$ ]]; then
+        echo "[x] Error: Remind value must be between 5 and 120"
+        exit 1
+    fi
 
     while true; do
         # Randomly select a habit from the list
         reminder=${habits[$RANDOM % ${#habits[@]}]}
-        sleep 5
+        sleep $1
         echo "[!] $reminder"
         notify-send -t 5000 "Iris" "$reminder"
     done
     exit
+}
+
+# Check if no arguments or flags are provided
+if [[ $# -eq 0 ]]; then
+    help
 fi
 
-
-# If an unknown option is provided, show help
-display_help
-exit 1
+# Parse command-line options
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -h|--help)
+            help
+            ;;
+        -w|--warm)
+            warm $2
+            shift 2
+            ;;
+        -d|--dim)
+            dim $2
+            shift 2
+            ;;
+        -i|--inverse)
+            if [[ $2 && $2 != -* ]]; then
+                echo "[x] Error: The '-i' or '--inverse' flag does not take any arguments"
+                echo "[!] Run -h or --help for more information"
+                exit 1
+            fi
+            inverse
+            shift 1
+            ;;
+        -n|--normal)
+            if [[ $2 && $2 != -* ]]; then
+                echo "[x] Error: The '-n' or '--normal' flag does not take any arguments"
+                echo "[!] Run -h or --help for more information"
+                exit 1
+            fi
+            normal
+            shift 1
+            ;;
+        -r|--remind)
+            remind $2
+            shift 2
+            ;;
+        -*)
+            echo "[x] Unknown option: $1"
+            help
+            ;;
+        *)
+            echo "[x] Unknown parameter: $1"
+            help
+            ;;
+    esac
+done
