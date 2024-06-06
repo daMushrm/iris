@@ -2,7 +2,7 @@
 
 # logic for each flag
 help() {
-    echo "Usage: $0 [OPTIONS] [ARGUMENTS]"
+    echo "Usage: $(basename "$0") [OPTIONS] [ARGUMENTS]"
     echo ""
     echo "Options:"
     echo "  -h, --help             Display this help message"
@@ -13,8 +13,8 @@ help() {
     echo "  -n, --normal           Restore default color settings"
     echo ""
     echo "Examples:"
-    echo "  $0 -w 5 -d 3 -i -r 15"
-    echo "  $0 --warm 5 --dim 3 --inverse --remind 15"
+    echo "  $(basename "$0") -w 5 -d 3 -i -r 15"
+    echo "  $(basename "$0") --warm 5 --dim 3 --inverse --remind 15"
     exit 0
 }
 
