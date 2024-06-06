@@ -3,18 +3,21 @@
 # logic for each flag
 help() {
     echo "Usage: $0 [OPTIONS] [ARGUMENTS]"
+    echo ""
     echo "Options:"
-    echo "  -h, --help             Show help message"
-    echo "  -w, --warm    [VALUE]  Set warm value (1~10)"
-    echo "  -d, --dim     [VALUE]  Set dim value (1~10)"
-    echo "  -r, --remind  [VALUE]  Set remind interval in minutes (5~120)"
-    echo "  -i, --inverse          Activate inverted colors"
-    echo "  -n, --normal           Restore normal colors"
-    echo "Example:"
+    echo "  -h, --help             Display this help message"
+    echo "  -w, --warm    [VALUE]  Adjust the color temperature (range: 1-10)"
+    echo "  -d, --dim     [VALUE]  Adjust the brightness level (range: 1-10)"
+    echo "  -r, --remind  [VALUE]  Set a reminder interval in minutes (range: 5-120)"
+    echo "  -i, --inverse          Enable inverted colors"
+    echo "  -n, --normal           Restore default color settings"
+    echo ""
+    echo "Examples:"
     echo "  $0 -w 5 -d 3 -i -r 15"
-    echo "  $0 --warm 5 --dim 3 --inverse -remind 15"
+    echo "  $0 --warm 5 --dim 3 --inverse --remind 15"
     exit 0
 }
+
 
 warm() {
     if [[ ! $1 =~ ^[1-9]$|^10$ ]]; then
