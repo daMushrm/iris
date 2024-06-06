@@ -133,7 +133,7 @@ while [[ "$#" -gt 0 ]]; do
     esac
 done
 
-# Check if remind option is enabled
+# Run remind if remind option is enabled
 if [[ $remind_option -eq 1 ]]; then
     if [[ $remind_value_in_min == "stop" ]]; then
         echo -e "${YELLOW}[!] Iris is no longer reminding you${NC}"
@@ -144,6 +144,17 @@ if [[ $remind_option -eq 1 ]]; then
         exit 1
     fi
     echo -e "${GREEN}[!] Iris is now reminding you every $remind_value_in_min minutes${NC}"
+    read -p "Do you want to automatically run this script on startup? (y/N): " auto_run
+    if [[ $auto_run == "y" ]]; then
+        # logic here
+        echo -e "${GREEN}[!] Automatically running Iris on startup${NC}"
+        # write a good explanation
+        # check if the script is already in the startup folder
+        cp "$(readlink -f "$0")" /etc/init.d/
+        ln -s /etc/init.d/iris.sh /etc/rc.d/
+        # You may need to adjust the paths and commands based on your system configuration
+    fi
+    fi
     echo -e "${YELLOW}[!] Run 'iris -r stop' to stop the reminder${NC}"
     remind $remind_value_in_sec &
 fi
