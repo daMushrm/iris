@@ -57,11 +57,6 @@ remind() {
         "Relax your shoulders and release tension."
     )
 
-    if [[ ! $1 =~ ^[5-9]$|^1[0-9]$|^120$ ]]; then
-        echo "[x] Error: Remind value must be between 5 and 120"
-        exit 1
-    fi
-
     while true; do
         # Randomly select a habit from the list
         reminder=${habits[$RANDOM % ${#habits[@]}]}
@@ -71,7 +66,8 @@ remind() {
 } 
 
 remind_option=0
-remind_value=0
+remind_value_in_sec=0
+remind_value_in_min=0
 
 # Check if no arguments or flags are provided
 if [[ $# -eq 0 ]]; then
@@ -112,7 +108,8 @@ while [[ "$#" -gt 0 ]]; do
             ;;
         -r|--remind)
             remind_option=1
-            remind_value=$2
+            remind_value_in_min=$2
+            remind_value_in_sec=$(( $2 * 60 ))
             shift 2
             ;;
         -*)
@@ -126,4 +123,15 @@ while [[ "$#" -gt 0 ]]; do
     esac
 done
 
-remind $remind_value &
+if [[ $remind_option -eq 1 ]]; then
+    if [[ $remind_value_in_min == "stop" ]]; then
+        echo "[!] Iris is no longer reminding you"
+        pkill iris
+        exit 0
+    elif [[ ! $remind_value_in_min =~ ^[5-9]$|^1[0-9]$|^120$ ]]; then
+        echo "[x] Error: Remind value must be between 5 and 120 minutes"
+        exit 1
+    fi
+    echo "[!] Iris is now reminding you every $remind_value_in_min minutes"
+    remind $remind_value_in_sec &
+fi
