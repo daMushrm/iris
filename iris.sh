@@ -71,6 +71,8 @@ remind() {
     done
     exit
 }
+remind_option=0
+remind_value=0
 
 # Check if no arguments or flags are provided
 if [[ $# -eq 0 ]]; then
@@ -110,7 +112,8 @@ while [[ "$#" -gt 0 ]]; do
             shift 1
             ;;
         -r|--remind)
-            remind $2
+            remind_option=1
+            remind_value=$2
             shift 2
             ;;
         -*)
@@ -123,3 +126,5 @@ while [[ "$#" -gt 0 ]]; do
             ;;
     esac
 done
+
+remind $remind_value
