@@ -12,18 +12,14 @@ install: $(SCRIPT)
 	@echo "\033[32m[!] Installation complete.\033[0m"
 	sh configure_iris.sh
 delete:
-	@echo "\033[1;33m[!] This will delete iris and auto start file. Are you sure you want to delete iris? [y/n]"
+	@echo "\033[1;33m[!] This will delete iris and auto start file. Are you sure you want to delete iris? [y/N]"
 	@read ans; \
 	if [ $$ans = "y" ]; then \
-		make delete_iris; \
+		sed -i '/iris/d' ~/.profile; \
+		echo "\033[0;32m[!] Deleted successfully\033[0m"; \
+	else \
+		echo "\033[1;33m[!] Ignored.\033[0m"; \
 	fi
-delete_iris:
-	@echo "\033[1;33m[!] Deleting iris..."
-	sudo rm $(DEST_DIR)/$(EXECUTABLE)
-	@echo "\033[32m[!] Deletion complete.\033[0m"
-	@echo "\033[1;33m[!] Deleting iris.desktop..."
-	sudo rm $(SERVICE_FILE)
-	@echo "\033[32m[!] Deletion complete.\033[0m"
 
 .PHONY: all install clean
 .PHONY: all delete install clean

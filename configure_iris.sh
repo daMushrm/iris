@@ -7,7 +7,7 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo "${YELLOW}Do you want to auto start remind on startup? [y/n]:${NC}"
+echo "${YELLOW}Do you want to auto start remind on startup? [y/N]:${NC}"
 read choice
 
 if [ "$choice" = "y" ]; then
@@ -22,17 +22,7 @@ if [ "$choice" = "y" ]; then
     fi
   done
 
-  echo "${BLUE}Creating iris.desktop file...${NC}"
-  SERVICE_FILE="$HOME/.config/autostart/iris.desktop"
-  
-  touch $SERVICE_FILE
-  echo "[Desktop Entry]" | sudo tee $SERVICE_FILE
-  echo "Version=1.0" | sudo tee -a $SERVICE_FILE
-  echo "Comment=Run iris at startup" | sudo tee -a $SERVICE_FILE
-  echo "Exec=/usr/bin/iris -r $interval" | sudo tee -a $SERVICE_FILE
-  echo "Terminal=false" | sudo tee -a $SERVICE_FILE
-  echo "Type=Application" | sudo tee -a $SERVICE_FILE
-  echo "Categories=Utility;" | sudo tee -a $SERVICE_FILE
+  echo "iris -r $interval" >> ~/.profile
 
   echo "${GREEN}[!] Iris is enabled to run at startup, beginning from next login.${NC}"
 else

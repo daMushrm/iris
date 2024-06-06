@@ -9,6 +9,9 @@ NC='\033[0m' # No Color
 
 # logic for each flag
 help() {
+    echo -e "${YELLOW}"
+    cat ascii
+    echo ""
     echo -e "${BLUE}Usage: $(basename "$0") [OPTIONS] [ARGUMENTS]${NC}"
     echo ""
     echo "Options:"
@@ -23,6 +26,7 @@ help() {
     echo "Examples:"
     echo -e "  ${YELLOW}$(basename "$0") -w 5 -d 3 -i -r 15${NC}"
     echo -e "  ${YELLOW}$(basename "$0") --warm 5 --dim 3 --inverse --remind 15${NC}"
+    echo ""
     exit 0
 }
 
@@ -158,3 +162,4 @@ if [[ $remind_option -eq 1 ]]; then
     echo -e "${YELLOW}[!] Run 'iris -r stop' to stop the reminder${NC}"
     remind $remind_value_in_sec &
 fi
+
