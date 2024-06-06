@@ -9,6 +9,7 @@ help() {
     echo "  -w, --warm    [VALUE]  Adjust the color temperature (range: 1-10)"
     echo "  -d, --dim     [VALUE]  Adjust the brightness level (range: 1-10)"
     echo "  -r, --remind  [VALUE]  Set a reminder interval in minutes (range: 5-120)"
+    echo "                         Run 'iris -r stop' to stop the reminder"
     echo "  -i, --inverse          Enable inverted colors"
     echo "  -n, --normal           Restore default color settings"
     echo ""
@@ -17,7 +18,6 @@ help() {
     echo "  $(basename "$0") --warm 5 --dim 3 --inverse --remind 15"
     exit 0
 }
-
 
 warm() {
     if [[ ! $1 =~ ^[1-9]$|^10$ ]]; then
@@ -126,6 +126,7 @@ while [[ "$#" -gt 0 ]]; do
     esac
 done
 
+# Check if remind option is enabled
 if [[ $remind_option -eq 1 ]]; then
     if [[ $remind_value_in_min == "stop" ]]; then
         echo "[!] Iris is no longer reminding you"
@@ -136,5 +137,6 @@ if [[ $remind_option -eq 1 ]]; then
         exit 1
     fi
     echo "[!] Iris is now reminding you every $remind_value_in_min minutes"
+    echo "[!] Run 'iris -r stop' to stop the reminder"
     remind $remind_value_in_sec &
 fi
