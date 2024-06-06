@@ -66,11 +66,10 @@ remind() {
         # Randomly select a habit from the list
         reminder=${habits[$RANDOM % ${#habits[@]}]}
         sleep $1
-        echo "[!] $reminder"
         notify-send -t 5000 "Iris" "$reminder"
     done
-    exit
-}
+} 
+
 remind_option=0
 remind_value=0
 
@@ -127,4 +126,4 @@ while [[ "$#" -gt 0 ]]; do
     esac
 done
 
-remind $remind_value
+remind $remind_value &
