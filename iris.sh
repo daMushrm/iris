@@ -82,7 +82,7 @@ remind() {
         reminder=${habits[$RANDOM % ${#habits[@]}]}
         sleep $1
         echo "DONE"
-        # notify-send -t 5000 "Iris" "$reminder"
+        notify-send -t 5000 "Iris" "$reminder"
     done
 } 
 
