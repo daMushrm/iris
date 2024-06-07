@@ -10,10 +10,13 @@ NC='\033[0m' # No Color
 # logic for each flag
 help() {
     echo -e "${YELLOW}"
-    echo "| |\`\`\`\`\`\`\`\`\`, |             ..''''"
-    echo "| |'''|'''''  |          .''               "
-    echo "| |    \`.     |       ..'                 "
-    echo "| |      \`.   | ....''   @M1ghtyMushroom  "
+    echo " ___   ______    ___   _______ "
+    echo "|   | |    _ |  |   | |       |"
+    echo "|   | |   | ||  |   | |  _____|"
+    echo "|   | |   |_||_ |   | | |_____" 
+    echo "|   | |    __  ||   | |_____  |"
+    echo "|   | |   |  | ||   |  _____| |"
+    echo "|___| |___|  |_||___| |_______|"
     echo ""
     echo -e "${BLUE}Usage: $(basename "$0") [OPTIONS] [ARGUMENTS]${NC}"
     echo ""
