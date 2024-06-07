@@ -14,7 +14,8 @@ install: $(SCRIPT)
 delete:
 	@echo "\033[1;33m[!] This will delete iris and auto start file. Are you sure you want to delete iris? [y/N]"
 	@read ans; \
-	if [ $$ans = "y" ]; then \
+	if [ $$ans = "y" ] || [ $$ans = "Y" ]; then \
+		sudo rm -f $(DEST_DIR)/$(EXECUTABLE); \
 		sed -i '/iris/d' ~/.profile; \
 		echo "\033[0;32m[!] Deleted successfully\033[0m"; \
 	else \

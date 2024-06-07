@@ -10,7 +10,7 @@ NC='\033[0m' # No Color
 echo "${YELLOW}Do you want to auto start remind on startup? [y/N]:${NC}"
 read choice
 
-if [ "$choice" = "y" ]; then
+if [ "$choice" = "y" ] || [ "$choice" = "Y" ]; then
   while true; do
     echo "${BLUE}Enter the reminder interval in minutes (between 5 and 120):${NC}"
     read interval

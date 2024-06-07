@@ -10,7 +10,10 @@ NC='\033[0m' # No Color
 # logic for each flag
 help() {
     echo -e "${YELLOW}"
-    cat ascii
+    echo "| |\`\`\`\`\`\`\`\`\`, |             ..''''"
+    echo "| |'''|'''''  |          .''               "
+    echo "| |    \`.     |       ..'                 "
+    echo "| |      \`.   | ....''   @M1ghtyMushroom  "
     echo ""
     echo -e "${BLUE}Usage: $(basename "$0") [OPTIONS] [ARGUMENTS]${NC}"
     echo ""
@@ -75,7 +78,8 @@ remind() {
         # Randomly select a habit from the list
         reminder=${habits[$RANDOM % ${#habits[@]}]}
         sleep $1
-        notify-send -t 5000 "Iris" "$reminder"
+        echo "DONE"
+        # notify-send -t 5000 "Iris" "$reminder"
     done
 } 
 
@@ -140,25 +144,15 @@ done
 # Run remind if remind option is enabled
 if [[ $remind_option -eq 1 ]]; then
     if [[ $remind_value_in_min == "stop" ]]; then
-        echo -e "${YELLOW}[!] Iris is no longer reminding you${NC}"
+        echo -e "${GREEN}[!] Iris is no longer reminding you${NC}"
         pkill iris
         exit 0
-    elif [[ ! $remind_value_in_min =~ ^[5-9]$|^1[0-9]$|^120$ ]]; then
-        echo -e "${RED}[x] Error: Remind value must be between 5 and 120 minutes${NC}"
+    elif ! [[ $remind_value_in_min =~ ^[0-9]+$ ]] || (( $remind_value_in_min < 5 || $remind_value_in_min > 120 )); then
+        echo -e "${RED}[x] Error: Remind value must be a number between 5 and 120 minutes${NC}"
+        echo -e "${YELLOW}[!] Run '$(basename "$0") -r stop' to stop the reminder${NC}"
         exit 1
     fi
     echo -e "${GREEN}[!] Iris is now reminding you every $remind_value_in_min minutes${NC}"
-    read -p "Do you want to automatically run this script on startup? (y/N): " auto_run
-    if [[ $auto_run == "y" ]]; then
-        # logic here
-        echo -e "${GREEN}[!] Automatically running Iris on startup${NC}"
-        # write a good explanation
-        # check if the script is already in the startup folder
-        cp "$(readlink -f "$0")" /etc/init.d/
-        ln -s /etc/init.d/iris.sh /etc/rc.d/
-        # You may need to adjust the paths and commands based on your system configuration
-    fi
-    fi
     echo -e "${YELLOW}[!] Run 'iris -r stop' to stop the reminder${NC}"
     remind $remind_value_in_sec &
 fi
