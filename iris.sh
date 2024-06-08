@@ -9,30 +9,31 @@ NC='\033[0m' # No Color
 
 # logic for each flag
 help() {
-    echo -e "${YELLOW}"
-    echo " ___   ______    ___   _______ "
-    echo "|   | |    _ |  |   | |       |"
-    echo "|   | |   | ||  |   | |  _____|"
-    echo "|   | |   |_||_ |   | | |_____" 
-    echo "|   | |    __  ||   | |_____  |"
-    echo "|   | |   |  | ||   |  _____| |"
-    echo "|___| |___|  |_||___| |_______|"
-    echo ""
-    echo -e "${BLUE}Usage: $(basename "$0") [OPTIONS] [ARGUMENTS]${NC}"
-    echo ""
-    echo "Options:"
-    echo -e "  ${YELLOW}-h, --help${NC}             Display this help message"
-    echo -e "  ${YELLOW}-w, --warm    [VALUE]${NC}  Adjust the color temperature (range: 1-10)"
-    echo -e "  ${YELLOW}-d, --dim     [VALUE]${NC}  Adjust the brightness level (range: 1-10)"
-    echo -e "  ${YELLOW}-r, --remind  [VALUE]${NC}  Set a reminder interval in minutes (range: 5-120)"
-    echo -e "                         Run 'iris -r stop' to stop the reminder"
-    echo -e "  ${YELLOW}-i, --inverse${NC}          Enable inverted colors"
-    echo -e "  ${YELLOW}-n, --normal${NC}           Restore default color settings"
-    echo ""
-    echo "Examples:"
-    echo -e "  ${YELLOW}$(basename "$0") -w 5 -d 3 -i -r 15${NC}"
-    echo -e "  ${YELLOW}$(basename "$0") --warm 5 --dim 3 --inverse --remind 15${NC}"
-    echo ""
+    echo -e " 
+${YELLOW}
+ ___   ______    ___   _______ 
+|   | |    _ |  |   | |       |
+|   | |   | ||  |   | |  _____|
+|   | |   |_||_ |   | | |_____  
+|   | |    __  ||   | |_____  |
+|   | |   |  | ||   |  _____| |
+|___| |___|  |_||___| |_______|
+${NC}
+
+${BLUE}Usage: $(basename "$0") [OPTIONS] [ARGUMENTS]${NC}
+
+Options:
+  ${YELLOW}-h, --help${NC}             Display this help message
+  ${YELLOW}-w, --warm    [VALUE]${NC}  Adjust the color temperature (range: 1-10)
+  ${YELLOW}-d, --dim     [VALUE]${NC}  Adjust the brightness level (range: 1-10)
+  ${YELLOW}-r, --remind  [VALUE]${NC}  Set a reminder interval in minutes (range: 5-120)
+                         Run 'iris -r stop' to stop the reminder
+  ${YELLOW}-i, --inverse${NC}          Enable inverted colors
+  ${YELLOW}-n, --normal${NC}           Restore default color settings
+
+Examples:
+  ${YELLOW}$(basename "$0") -w 5 -d 3 -i -r 15${NC}
+  ${YELLOW}$(basename "$0") --warm 5 --dim 3 --inverse --remind 15${NC}"
     exit 0
 }
 
