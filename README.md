@@ -16,8 +16,31 @@ Iris is a versatile shell script designed to enhance your screen experience by p
 
 Ensure you have `xcalib`, `libnotify`, and `make` installed on your system. You can install them using the following command:
 
+- Debian-based Distributions (e.g., Ubuntu, Debian)
+
 ```bash
-sudo apt-get install xcalib libnotify make
+$ sudo apt update && sudo apt install xcalib libnotify make
+```
+
+- Fedora
+```bash
+$ sudo dnf install xcalib libnotify make
+```
+
+- CentOS/RHEL
+```bash
+$ sudo yum install xcalib libnotify make
+```
+
+- SUSE-based Distributions (e.g., openSUSE)
+
+```bash
+$ sudo zypper install xcalib libnotify-tools make
+```
+
+- Arch-based Distributions (e.g., Arch Linux, Manjaro)
+```bash
+$ sudo pacman -Syu xcalib libnotify make
 ```
 
 ### Steps
@@ -25,14 +48,14 @@ sudo apt-get install xcalib libnotify make
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/M1ghtyMushroom/iris.git
-   cd iris
+   $ git clone https://github.com/M1ghtyMushroom/iris.git
+   $ cd iris
    ```
 
 2. Install the script:
 
    ```bash
-   make install
+   $ make install
    ```
 
    You will be prompted to run the reminder option on startup. Proceed with `y` and select your desired time interval to set it up.
@@ -58,19 +81,19 @@ Options:
 - Adjust the color temperature to 5, brightness to 3, enable inverted colors, and set a reminder every 15 minutes:
 
   ```bash
-  iris -w 5 -d 3 -i -r 15
+  $ iris -w 5 -d 3 -i -r 15
   ```
 
 - Restore default screen settings:
 
   ```bash
-  iris -n
+  $ iris -n
   ```
 
 - Stop the reminder:
 
   ```bash
-  iris -r stop
+  $ iris -r stop
   ```
 
 ## Uninstallation ⚠️
@@ -78,7 +101,7 @@ Options:
 To uninstall Iris and remove its auto-start configuration, run:
 
 ```bash
-make delete
+$ make delete
 ```
 
 ## Contributing 🤝
