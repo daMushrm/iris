@@ -19,7 +19,7 @@ Ensure you have `xcalib`, `libnotify`, and `make` installed on your system. You 
 - Debian-based Distributions (e.g., Ubuntu, Debian)
 
 ```bash
-$ sudo apt update && sudo apt install xcalib libnotify make
+$ sudo apt update && sudo apt install xcalib libnotify4 make
 ```
 
 - Fedora
