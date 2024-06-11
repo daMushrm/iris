@@ -22,8 +22,9 @@ if [ "$choice" = "y" ] || [ "$choice" = "Y" ]; then
     fi
   done
 
+  sed -i '/iris/d' ~/.profile
   echo "iris -r $interval" >> ~/.profile
-
+  
   echo "${GREEN}[!] Iris is enabled to run at startup, beginning from next login.${NC}"
 else
   echo "${YELLOW}[!] Skipping startup configuration.${NC}"
