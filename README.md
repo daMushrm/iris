@@ -48,7 +48,7 @@ $ sudo pacman -Syu xcalib libnotify make
 1. Clone the repository:
 
    ```bash
-   $ git clone https://github.com/M1ghtyMushroom/iris.git
+   $ git clone https://github.com/daMushrm/iris.git
    $ cd iris
    ```
 
